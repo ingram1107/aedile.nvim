@@ -1,4 +1,4 @@
-# aedile.nvim
+# [WIP] aedile.nvim
 
 A plugin that help you to open REPL according to the current buffer filetype
 
