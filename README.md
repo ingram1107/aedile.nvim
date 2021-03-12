@@ -32,5 +32,9 @@ aedile.modify_repl({
 })
 ```
 
+# Check out these awesome plugins too
+- [vim-slime](https://github.com/jpalardy/vim-slime)
+- [vim-sexp](https://github.com/guns/vim-sexp)
+
 # Todo
 - [ ] documentation
