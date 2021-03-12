@@ -14,8 +14,10 @@ local function open_repl()
   vim.cmd('vs | term '..repl)
 end
 
-local function modify_repl(key, value)
-  ft_table[key] = value
+local function modify_repl(table)
+  for key, value in pairs(table) do
+    ft_table[key] = value
+  end
 end
 
 return {
