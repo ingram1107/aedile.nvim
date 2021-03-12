@@ -30,6 +30,9 @@ aedile.modify_repl({
   --  ft  = repl
       lua = 'luajit',
 })
+
+-- open repl by pressing <leader>r in normal mode
+vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").open_repl()<cr>')
 ```
 
 # Check out these awesome plugins too
