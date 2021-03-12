@@ -26,10 +26,10 @@ use 'ingram1107/aedile.nvim'
 local aedile = require('aedile')
 
 -- assign repl to a filetype
-aedile.ft_table = {
+aedile.modify_repl({
   --  ft  = repl
       lua = 'luajit',
-}
+})
 ```
 
 # Todo
