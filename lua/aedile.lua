@@ -21,7 +21,6 @@ local function modify_repl(table)
 end
 
 return {
-  ft_table = ft_table,
   open_repl = open_repl,
   modify_repl = modify_repl,
 }
