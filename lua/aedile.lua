@@ -1,6 +1,6 @@
 -- aedile.lua
 --
---    a plugin that help to open REPL according to current buffer filetype
+--    a plugin that open REPL in a split window according to current buffer filetype
 
 local ft_table = {
   --  ft      =  repl
