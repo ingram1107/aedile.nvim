@@ -1,6 +1,7 @@
 -- aedile.lua
 --
 --    a plugin that open REPL in a split window according to current buffer filetype
+local TRUE = 1
 
 local ft_table = {
   --  ft      =  repl
@@ -9,9 +10,31 @@ local ft_table = {
       python  = 'python',
 }
 
-local function open_repl()
+local toggle = false
+local term_win_id
+local term_buf_id
+
+local function toggle_repl()
   local repl = ft_table[vim.bo.filetype]
-  vim.cmd('vs | term '..repl)
+
+  if vim.fn.bufexists(term_buf_id) == TRUE then
+    if toggle == false then
+      vim.cmd('vertical sb '..term_buf_id)
+      term_win_id = vim.api.nvim_get_current_win()
+      toggle = true
+    else
+      vim.api.nvim_win_close(term_win_id, false)
+      toggle = false
+    end
+  -- handle case that buffer doesn't exists 
+  -- (first time usage or buffer have closed)
+  else
+    vim.cmd('vs | term '..repl)
+    term_win_id = vim.api.nvim_get_current_win()
+    term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
+    toggle = true
+  end
+
 end
 
 local function modify_repl(table)
@@ -21,6 +44,6 @@ local function modify_repl(table)
 end
 
 return {
-  open_repl = open_repl,
+  toggle_repl = toggle_repl,
   modify_repl = modify_repl,
 }
