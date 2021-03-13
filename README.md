@@ -41,3 +41,6 @@ vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").open_repl(
 
 # Todo
 - [ ] documentation
+- [ ] toggle REPL instead of open and close it
+- [ ] create split window without moving the cursor
+- [ ] able to specify the window split method (`split`/`vsplit`)
