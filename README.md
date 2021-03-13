@@ -32,7 +32,7 @@ aedile.modify_repl({
 })
 
 -- open repl by pressing <leader>r in normal mode
-vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").open_repl()<cr>')
+vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").toggle_repl()<cr>')
 ```
 
 # Check out these awesome plugins too
