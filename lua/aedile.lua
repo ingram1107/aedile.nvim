@@ -1,6 +1,5 @@
 -- aedile.lua
---
---    a plugin that open REPL in a split window according to current buffer filetype
+-- a plugin that open REPL in a split window according to current buffer filetype
 local TRUE = 1
 
 local ft_table = {
@@ -19,7 +18,7 @@ local function toggle_repl()
 
   if vim.fn.bufexists(term_buf_id) == TRUE then
     if toggle == false then
-      vim.cmd('vertical sb '..term_buf_id)
+      vim.cmd('vertical sbuffer '..term_buf_id)
       term_win_id = vim.api.nvim_get_current_win()
       toggle = true
     else
@@ -29,7 +28,7 @@ local function toggle_repl()
   -- handle case that buffer doesn't exists 
   -- (first time usage or buffer have closed)
   else
-    vim.cmd('vs | term '..repl)
+    vim.cmd('vsplit | terminal '..repl)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     toggle = true
