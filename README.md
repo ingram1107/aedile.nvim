@@ -46,4 +46,4 @@ vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").toggle_rep
 - [ ] documentation
 - [X] toggle REPL instead of open and close it
 - [ ] create split window without moving the cursor
-- [ ] able to specify the window split method (`split`/`vsplit`)
+- [X] able to specify the window split method
