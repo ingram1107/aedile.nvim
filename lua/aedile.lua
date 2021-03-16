@@ -1,5 +1,10 @@
 -- aedile.lua
 -- a plugin that open REPL in a split window according to current buffer filetype
+if vim.version().minor < 5 then
+  vim.api.nvim_error_event(0, "Neovim version < 0.5.0: deactivate all Aedile's functions")
+  return
+end
+
 local TRUE = 1
 
 local ft_table = {
@@ -25,7 +30,7 @@ local function toggle_repl()
       vim.api.nvim_win_close(term_win_id, false)
       toggle = false
     end
-  -- handle case that buffer doesn't exists 
+  -- handle case that buffer doesn't exists
   -- (first time usage or buffer have closed)
   else
     vim.cmd('vsplit | terminal '..repl)
