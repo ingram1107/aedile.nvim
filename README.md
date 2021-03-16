@@ -27,9 +27,12 @@ local aedile = require('aedile')
 
 -- assign repl to a filetype
 aedile.modify_repl({
-  --  ft  = repl
+  --  ft  =  repl
       lua = 'luajit',
 })
+
+-- use 'vertical' split
+aedile.split_method('vertical')
 
 -- open repl by pressing <leader>r in normal mode
 vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").toggle_repl()<cr>')
