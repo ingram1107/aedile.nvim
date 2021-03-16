@@ -14,6 +14,8 @@ local ft_table = {
       python  = 'python',
 }
 
+local split_method = ''
+
 local toggle = false
 local term_win_id
 local term_buf_id
@@ -23,7 +25,7 @@ local function toggle_repl()
 
   if vim.fn.bufexists(term_buf_id) == TRUE then
     if toggle == false then
-      vim.cmd('vertical sbuffer '..term_buf_id)
+      vim.cmd(split_method..'sbuffer '..term_buf_id)
       term_win_id = vim.api.nvim_get_current_win()
       toggle = true
     else
@@ -33,7 +35,7 @@ local function toggle_repl()
   -- handle case that buffer doesn't exists
   -- (first time usage or buffer have closed)
   else
-    vim.cmd('vsplit | terminal '..repl)
+    vim.cmd(split_method..'split | terminal '..repl)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     toggle = true
@@ -47,7 +49,16 @@ local function modify_repl(table)
   end
 end
 
+local function modify_method(option)
+  split_method = option..' '
+  if option ~= 'vertical' then
+    vim.api.nvim_err_write("Fatal: current split method only support 'vertical'")
+    split_method = ''
+  end
+end
+
 return {
   toggle_repl = toggle_repl,
   modify_repl = modify_repl,
+  split_method = modify_method,
 }
