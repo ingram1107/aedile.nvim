@@ -1,7 +1,7 @@
 -- aedile.lua
 -- a plugin that open REPL in a split window according to current buffer filetype
 if vim.version().minor < 5 then
-  vim.api.nvim_error_event(0, "Neovim version < 0.5.0: deactivate all Aedile's functions")
+  vim.api.nvim_err_write("Neovim version < 0.5.0: deactivate all Aedile's functions")
   return
 end
 
