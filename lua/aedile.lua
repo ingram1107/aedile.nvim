@@ -5,8 +5,6 @@ if vim.version().minor < 5 then
   return
 end
 
-local TRUE = 1
-
 local ft_table = {
   --  ft      =  repl
       lua     = 'lua',
@@ -23,7 +21,7 @@ local term_buf_id
 local function toggle_repl()
   local repl = ft_table[vim.bo.filetype]
 
-  if vim.fn.bufexists(term_buf_id) == TRUE then
+  if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
       vim.cmd(split_method..'sbuffer '..term_buf_id)
       term_win_id = vim.api.nvim_get_current_win()
