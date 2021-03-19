@@ -29,8 +29,13 @@ local function toggle_repl()
       term_win_id = vim.api.nvim_get_current_win()
       toggle = true
     else
-      vim.api.nvim_win_close(term_win_id, false)
-      toggle = false
+      if vim.api.nvim_win_is_valid(term_win_id) == true then
+        vim.api.nvim_win_close(term_win_id, false)
+        toggle = false
+      else
+        vim.cmd(split_method..'sbuffer '..term_buf_id)
+        term_win_id = vim.api.nvim_get_current_win()
+      end
     end
   -- handle case that buffer doesn't exists
   -- (first time usage or buffer have closed)
