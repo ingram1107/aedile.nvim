@@ -41,6 +41,7 @@ local function toggle_repl()
     vim.cmd(split_method..'split | terminal '..repl)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
+    print("terminal jobid: "..vim.api.nvim_buf_get_var(term_buf_id, "terminal_job_id"))
     toggle = true
   end
 
