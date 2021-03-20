@@ -43,7 +43,7 @@ vim.api.nvim_set_keymap('n', '<leader>r', '<cmd>lua require("aedile").toggle_rep
 - [vim-sexp](https://github.com/guns/vim-sexp)
 
 # Todo
-- [ ] documentation
+- [X] documentation
 - [X] toggle REPL instead of open and close it
 - [ ] create split window without moving the cursor
 - [X] able to specify the window split method
