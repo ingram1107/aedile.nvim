@@ -70,12 +70,12 @@ modify_repl()                                             *aedile-modify_repl*
 	})
 <
 
-modify_method()                          *aedile-split* *aedile-modify_method*
+split_method()                                           *aedile-split_method*
 	Modify the split method. Currently only support `vertical`.
 
 	Usage:
 >
-	aedile.modify_method('vertical')
+	aedile.split_method('vertical')
 <
 
   vim:tw=78:ts=8:ft=help:norl:

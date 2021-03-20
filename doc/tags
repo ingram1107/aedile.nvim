@@ -2,8 +2,7 @@ aedile	aedile.txt	/*aedile*
 aedile-command	aedile.txt	/*aedile-command*
 aedile-config	aedile.txt	/*aedile-config*
 aedile-default	aedile.txt	/*aedile-default*
-aedile-modify_method	aedile.txt	/*aedile-modify_method*
 aedile-modify_repl	aedile.txt	/*aedile-modify_repl*
-aedile-split	aedile.txt	/*aedile-split*
+aedile-split_method	aedile.txt	/*aedile-split_method*
 aedile-toggle_repl	aedile.txt	/*aedile-toggle_repl*
 aedile.txt	aedile.txt	/*aedile.txt*
