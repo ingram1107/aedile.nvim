@@ -1,6 +1,6 @@
 # aedile.nvim
 
-A plugin that open REPL in a split window according to the current buffer filetype
+A Neovim plugin that open REPL in a split window according to the current buffer filetype
 
 # Requirement
 
