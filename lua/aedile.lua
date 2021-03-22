@@ -33,12 +33,20 @@ local toggle = false
 local term_win_id
 local term_buf_id
 
+local dir
+
+if vim.g.splitbelow == true or vim.g.splitright == true then
+  dir = "botright "
+else
+  dir = "topleft "
+end
+
 local function toggle_repl()
   local repl = ft_table[vim.bo.filetype]
 
   if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
-      vim.cmd(split_method..'sbuffer '..term_buf_id)
+      vim.cmd(dir..split_method..'sbuffer '..term_buf_id)
       term_win_id = vim.api.nvim_get_current_win()
       toggle = true
     else
@@ -53,7 +61,7 @@ local function toggle_repl()
   -- handle case that buffer doesn't exists
   -- (first time usage or buffer have closed)
   else
-    vim.cmd(split_method..'split | terminal '..repl)
+    vim.cmd(dir..split_method..'split | terminal '..repl)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     print("terminal jobid: "..vim.api.nvim_buf_get_var(term_buf_id, "terminal_job_id"))
