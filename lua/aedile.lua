@@ -16,7 +16,7 @@
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 --]]
 if vim.version().minor < 5 then
-  vim.api.nvim_err_write("Neovim version < 0.5.0: deactivate all Aedile's functions")
+  vim.api.nvim_err_writeln("Neovim version < 0.5.0: deactivate all Aedile's functions")
   return
 end
 
@@ -79,7 +79,7 @@ end
 local function modify_method(option)
   split_method = option..' '
   if option ~= 'vertical' then
-    vim.api.nvim_err_write("Fatal: current split method only support 'vertical'")
+    vim.api.nvim_err_writeln("Fatal: current split method only support 'vertical'")
     split_method = ''
   end
 end
