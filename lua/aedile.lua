@@ -32,6 +32,8 @@ local split_method = ''
 local toggle = false
 local term_win_id
 local term_buf_id
+local term_job_id
+local repl
 
 local dir
 
@@ -42,7 +44,7 @@ else
 end
 
 local function toggle_repl()
-  local repl = ft_table[vim.bo.filetype]
+  repl = ft_table[vim.bo.filetype]
 
   if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
@@ -64,10 +66,17 @@ local function toggle_repl()
     vim.cmd(dir..split_method..'split | terminal '..repl)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
-    print("terminal jobid: "..vim.api.nvim_buf_get_var(term_buf_id, "terminal_job_id"))
+    term_job_id = vim.api.nvim_buf_get_var(term_buf_id, 'terminal_job_id')
+    print("terminal jobid: "..term_job_id)
     toggle = true
   end
 
+end
+
+local function terminate_repl()
+  vim.fn.jobstop(term_job_id)
+  vim.api.nvim_buf_delete(term_buf_id, { force = true })
+  vim.api.nvim_echo({{'REPL `'..repl..'` (jobpid: '..term_job_id..') has been terminated', 'Normal'}}, false, {})
 end
 
 local function modify_repl(table)
@@ -86,6 +95,7 @@ end
 
 return {
   toggle_repl = toggle_repl,
+  terminate_repl = terminate_repl,
   modify_repl = modify_repl,
   split_method = modify_method,
 }
