@@ -10,7 +10,7 @@ Neovim nightly
 
 Vim-plug
 
-```vimscript
+```viml
 Plug 'ingram1107/aedile.nvim'
 ```
 
