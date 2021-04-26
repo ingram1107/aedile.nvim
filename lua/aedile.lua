@@ -48,7 +48,7 @@ local function toggle_repl()
 
   if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
-      vim.cmd(dir..split_method..'sbuffer '..term_buf_id)
+      vim.api.nvim_exec(dir..split_method..'sbuffer '..term_buf_id, false)
       term_win_id = vim.api.nvim_get_current_win()
       toggle = true
     else
@@ -56,14 +56,14 @@ local function toggle_repl()
         vim.api.nvim_win_close(term_win_id, false)
         toggle = false
       else
-        vim.cmd(split_method..'sbuffer '..term_buf_id)
+        vim.api.nvim_exec(split_method..'sbuffer '..term_buf_id, false)
         term_win_id = vim.api.nvim_get_current_win()
       end
     end
   -- handle case that buffer doesn't exists
   -- (first time usage or buffer have closed)
   else
-    vim.cmd(dir..split_method..'split | terminal '..repl)
+    vim.api.nvim_exec(dir..split_method..'split | terminal '..repl, false)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     term_job_id = vim.api.nvim_buf_get_var(term_buf_id, 'terminal_job_id')
