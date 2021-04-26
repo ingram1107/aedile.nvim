@@ -54,6 +54,23 @@ toggle_repl()                                             *aedile-toggle_repl*
 	'<cmd>lua require("aedile").toggle_repl()<cr>')
 <
 
+terminate_repl()                                       *aedile-terminate_repl*
+	Terminate the currently opened REPL and delete the buffer that REPL
+	have resided.
+
+	To use this command more effectively, you should map it by
+	using |map-commands|. The recommended mapping is as follow:
+>
+	nnoremap <leader>rt :lua require("aedile").terminate_repl()<cr>
+<
+	Or in lua:
+>
+	vim.api.nvim_set_keymap(
+	'n',
+	'<leader>rt',
+	'<cmd>lua require("aedile").terminate_repl()<cr>')
+<
+
 ==============================================================================
                                                                *aedile-config*
 
