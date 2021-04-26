@@ -44,13 +44,13 @@ toggle_repl()                                             *aedile-toggle_repl*
 	To use this command more effectively, you should map it by
 	using |map-commands|. The recommended mapping is as follow:
 >
-	nnoremap <leader>r :lua require("aedile").toggle_repl()<cr>
+	nnoremap <leader>rr :lua require("aedile").toggle_repl()<cr>
 <
 	Or in lua:
 >
 	vim.api.nvim_set_keymap(
 	'n',
-	'<leader>r',
+	'<leader>rr',
 	'<cmd>lua require("aedile").toggle_repl()<cr>')
 <
 
