@@ -76,7 +76,7 @@ local function toggle_repl()
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     term_job_id = vim.api.nvim_buf_get_var(term_buf_id, 'terminal_job_id')
-    print("terminal jobid: "..term_job_id)
+    vim.api.nvim_echo({{"terminal jobid: "..term_job_id}}, false, {})
     toggle = true
   end
 
