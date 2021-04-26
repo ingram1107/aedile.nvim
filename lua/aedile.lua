@@ -44,7 +44,16 @@ else
 end
 
 local function toggle_repl()
-  repl = ft_table[vim.bo.filetype]
+  local filetype = vim.bo.filetype
+  repl = ft_table[filetype]
+
+  if repl == nil and toggle == false then
+    vim.api.nvim_err_writeln("Fatal: REPL doesn't set for `"..filetype.."` files")
+    return
+  elseif repl == '' then
+    vim.api.nvim_err_writeln("Fatal: no REPL have been specified for `"..filetype.."`, check for empty string")
+    return
+  end
 
   if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
