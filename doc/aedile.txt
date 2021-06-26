@@ -29,6 +29,11 @@ other filetypes or modify the existing settings. Be aware that those REPL must
 be installed first into your system before you want this plugin to be
 effective.
 
+aedilen.nvim also offer some key mappings to have control over the terminal
+buffer after the REPL has been opened. By default, you could scroll up and
+down with <M-u> and <M-d>. You are able to customise it accordingly as
+|aedile-mappings| specified.
+
 Furthermore, aedile.nvim by default split the window horizontally (see
 |split|). If you don't like this default setting, you can modify the split
 method by calling |aedile-modify_method|.
@@ -93,6 +98,16 @@ split_method()                                           *aedile-split_method*
 	Usage:
 >
 	aedile.split_method('vertical')
+<
+
+mappings()                                                   *aedile-mappings*
+	Modify the mappings for scrolling up and down on the buffer that REPEL
+	resides. Two arguments required. Left argument is for scroll up, right
+	argument is for scroll down.
+
+	Usage:
+>
+	aedile.mappings("<C-[>", "<C-]>")
 <
 
   vim:tw=78:ts=8:ft=help:norl:

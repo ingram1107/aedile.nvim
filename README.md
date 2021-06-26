@@ -34,6 +34,9 @@ aedile.modify_repl({
 -- use 'vertical' split
 aedile.split_method('vertical')
 
+-- mapping for repl buf
+aedile.mappings('<C-[>', '<C-]>')
+
 -- KEYMAP
 vim.api.nvim_set_keymap('n', '<leader>rr', '<cmd>lua require("aedile").toggle_repl()<cr>')
 vim.api.nvim_set_keymap('n', '<leader>rc', '<cmd>lua require("aedile").terminate_repl()<cr>')
