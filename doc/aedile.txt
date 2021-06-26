@@ -6,15 +6,15 @@ License: GPLv3 (see <https://www.gnu.org/licenses/>)
 =============================================================================
                                                                      *aedile*
 
-A Neovim plugin that help you open REPL such as lua, ipython, sbcl etc. in a
+A Neovim plugin that helps you open REPL such as lua, ipython, sbcl etc. in a
 split window according to the current current buffer |filetype|.
 
-Note: This plugin require nightly built Neovim.
+Note: This plugin requires nightly built Neovim.
 
 =============================================================================
                                                              *aedile-default*
 
-aedile.nvim have mapped default REPL to some filetypes:
+aedile.nvim has mapped default REPL to some filetypes:
 >
 	local ft_table = {
 	-- ft     =  repl
@@ -80,7 +80,7 @@ terminate_repl()                                       *aedile-terminate_repl*
                                                                *aedile-config*
 
 modify_repl()                                             *aedile-modify_repl*
-	Modify the existing table for REPL by adding or overwriting
+	Modify the existing table for REPL by adding or overwriting.
 
 	Usage:
 >
