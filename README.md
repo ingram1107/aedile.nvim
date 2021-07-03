@@ -23,19 +23,22 @@ use 'ingram1107/aedile.nvim'
 # Usage
 
 ```lua
-local aedile = require('aedile')
+-- CONFIGURATION
+require('aedile').setup {
+  -- assign repl to a filetype
+  repl           = {
+    -- filetype = repl
+    'lua'       = 'luajit',
+    'python'    = 'ipython',
+  },
 
--- assign repl to a filetype
-aedile.modify_repl({
-  --  ft  =  repl
-      lua = 'luajit',
-})
+  -- use 'vertical' split
+  split_method   = 'vertical',
 
--- use 'vertical' split
-aedile.split_method('vertical')
-
--- mapping for repl buf
-aedile.mappings('<C-[>', '<C-]>')
+  -- mapping for repl buf
+  scrollup_map   = '<c-[>',
+  scrolldown_map = '<c-]>',
+}
 
 -- KEYMAP
 vim.api.nvim_set_keymap('n', '<leader>rr', '<cmd>lua require("aedile").toggle_repl()<cr>')
