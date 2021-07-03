@@ -134,10 +134,22 @@ local function modify_mappings(custom_scrollup, custom_scrolldown)
   scrolldown = custom_scrolldown
 end
 
+local function setup(conf_tbl)
+  if conf_tbl['repl'] ~= nil then
+    modify_repl(conf_tbl['repl'])
+  end
+  if conf_tbl['split_method'] ~= nil then
+    modify_method(conf_tbl['split_method'])
+  end
+
+  modify_mappings(conf_tbl['scrollup_map'], conf_tbl['scrolldown_map'])
+end
+
 return {
   toggle_repl = toggle_repl,
   terminate_repl = terminate_repl,
   modify_repl = modify_repl,
   split_method = modify_method,
   mappings = modify_mappings,
+  setup = setup,
 }
