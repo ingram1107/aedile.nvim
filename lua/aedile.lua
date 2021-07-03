@@ -20,14 +20,7 @@ if vim.version().minor < 5 then
   return
 end
 
-local ft_table = {
-  --  ft      =  repl
-      lua     = 'lua',
-      lisp    = 'sbcl',
-      python  = 'python',
-}
-
-local split_method = ''
+local config = require('aedile.config')
 
 local toggle = false
 local term_win_id
@@ -35,11 +28,7 @@ local term_buf_id
 local term_job_id
 local working_buf_id
 local repl
-
 local dir
-
-local scrollup = '<M-u>'
-local scrolldown = '<M-d>'
 
 if vim.g.splitbelow == true or vim.g.splitright == true then
   dir = "botright "
@@ -51,18 +40,18 @@ local function mapping_update()
   if term_win_id == nil and vim.api.nvim_win_is_valid(term_win_id) == false or 
      term_buf_id == nil and vim.api.nvim_buf_is_valid(term_buf_id) == false then
 
-    vim.api.nvim_buf_del_keymap(working_buf_id, 'n', scrollup)
-    vim.api.nvim_buf_del_keymap(working_buf_id, 'n', scrolldown)
+    vim.api.nvim_buf_del_keymap(working_buf_id, 'n', config.get_scrollup())
+    vim.api.nvim_buf_del_keymap(working_buf_id, 'n', config.get_scrolldown())
     return
   end
 
-  vim.api.nvim_buf_set_keymap(working_buf_id, 'n', scrollup, '<cmd>call win_execute('..term_win_id..',"normal! \\<c-u>")<cr>', {})
-  vim.api.nvim_buf_set_keymap(working_buf_id, 'n', scrolldown, '<cmd>call win_execute('..term_win_id..',"normal! \\<c-d>")<cr>', {})
+  vim.api.nvim_buf_set_keymap(working_buf_id, 'n', config.get_scrollup(), '<cmd>call win_execute('..term_win_id..',"normal! \\<c-u>")<cr>', {})
+  vim.api.nvim_buf_set_keymap(working_buf_id, 'n', config.get_scrolldown(), '<cmd>call win_execute('..term_win_id..',"normal! \\<c-d>")<cr>', {})
 end
 
 local function toggle_repl()
   local filetype = vim.bo.filetype
-  repl = ft_table[filetype]
+  repl = config.get_repl(filetype)
 
   if repl == nil and toggle == false then
     vim.api.nvim_err_writeln("Fatal: REPL doesn't set for `"..filetype.."` files")
@@ -74,7 +63,7 @@ local function toggle_repl()
 
   if term_buf_id ~= nil and vim.api.nvim_buf_is_valid(term_buf_id) == true then
     if toggle == false then
-      vim.api.nvim_exec(dir..split_method..'sbuffer '..term_buf_id, false)
+      vim.api.nvim_exec(dir..config.get_split_method()..'sbuffer '..term_buf_id, false)
       term_win_id = vim.api.nvim_get_current_win()
       mapping_update()
       toggle = true
@@ -84,7 +73,7 @@ local function toggle_repl()
         mapping_update()
         toggle = false
       else
-        vim.api.nvim_exec(split_method..'sbuffer '..term_buf_id, false)
+        vim.api.nvim_exec(config.get_split_method()..'sbuffer '..term_buf_id, false)
         term_win_id = vim.api.nvim_get_current_win()
         mapping_update()
       end
@@ -93,7 +82,7 @@ local function toggle_repl()
   -- (first time usage or buffer have closed)
   else
     working_buf_id = vim.api.nvim_win_get_buf(0)
-    vim.api.nvim_exec(dir..split_method..'split | terminal '..repl, false)
+    vim.api.nvim_exec(dir..config.get_split_method()..'split | terminal '..repl, false)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
     term_job_id = vim.api.nvim_buf_get_var(term_buf_id, 'terminal_job_id')
@@ -110,46 +99,19 @@ local function terminate_repl()
   vim.api.nvim_echo({{'REPL `'..repl..'` (jobpid: '..term_job_id..') has been terminated', 'Normal'}}, false, {})
 end
 
-local function modify_repl(table)
-  for key, value in pairs(table) do
-    ft_table[key] = value
-  end
-end
-
-local function modify_method(option)
-  split_method = option..' '
-  if option ~= 'vertical' then
-    vim.api.nvim_err_writeln("Fatal: current split method only support 'vertical'")
-    split_method = ''
-  end
-end
-
-local function modify_mappings(custom_scrollup, custom_scrolldown)
-  if custom_scrollup == '' or custom_scrollup == nil or custom_scrolldown == '' or custom_scrolldown == nil then
-    vim.api.nvim_echo({{'Disable mapping for Aedile', 'Normal'}},  false, {})
-    return
-  end
-
-  scrollup = custom_scrollup
-  scrolldown = custom_scrolldown
-end
-
 local function setup(conf_tbl)
   if conf_tbl['repl'] ~= nil then
-    modify_repl(conf_tbl['repl'])
+    config.modify_repl(conf_tbl['repl'])
   end
   if conf_tbl['split_method'] ~= nil then
-    modify_method(conf_tbl['split_method'])
+    config.modify_method(conf_tbl['split_method'])
   end
 
-  modify_mappings(conf_tbl['scrollup_map'], conf_tbl['scrolldown_map'])
+  config.modify_mappings(conf_tbl['scrollup_map'], conf_tbl['scrolldown_map'])
 end
 
 return {
   toggle_repl = toggle_repl,
   terminate_repl = terminate_repl,
-  modify_repl = modify_repl,
-  split_method = modify_method,
-  mappings = modify_mappings,
   setup = setup,
 }
