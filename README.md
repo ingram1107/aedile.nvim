@@ -4,7 +4,7 @@ A Neovim plugin that open REPL in a split window according to the current buffer
 
 # Requirement
 
-Neovim nightly
+Neovim 0.5+
 
 # Installation
 

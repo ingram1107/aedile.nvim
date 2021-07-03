@@ -9,8 +9,6 @@ License: GPLv3 (see <https://www.gnu.org/licenses/>)
 A Neovim plugin that helps you open REPL such as lua, ipython, sbcl etc. in a
 split window according to the current buffer |filetype|.
 
-Note: This plugin requires nightly built Neovim.
-
 =============================================================================
                                                              *aedile-default*
 
