@@ -54,10 +54,10 @@ local function toggle_repl()
   repl = config.get_repl(filetype)
 
   if repl == nil and toggle == false then
-    vim.api.nvim_err_writeln("Fatal: REPL doesn't set for `"..filetype.."` files")
+    vim.api.nvim_err_writeln("fatal: REPL doesn't set for `"..filetype.."` files")
     return
   elseif repl == '' then
-    vim.api.nvim_err_writeln("Fatal: no REPL have been specified for `"..filetype.."`, check for empty string")
+    vim.api.nvim_err_writeln("fatal: no REPL have been specified for `"..filetype.."`, check for empty string")
     return
   end
 
