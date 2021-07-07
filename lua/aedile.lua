@@ -28,13 +28,13 @@ local term_buf_id
 local term_job_id
 local working_buf_id
 local repl
-local dir
-
-if vim.g.splitbelow == true or vim.g.splitright == true then
-  dir = "botright "
-else
-  dir = "topleft "
-end
+local dir = (function()
+  if vim.g.splitbelow == true or vim.g.splitright == true then
+    return "botright "
+  else
+    return "topleft "
+  end
+end)()
 
 local function mapping_update()
   if term_win_id == nil and vim.api.nvim_win_is_valid(term_win_id) == false or 
