@@ -15,12 +15,12 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <https://www.gnu.org/licenses/>.
 --]]
+local config = require('config')
+
 if vim.version().minor < 5 then
   vim.api.nvim_err_writeln("fatal: Neovim version < 0.5.0: deactivate all Aedile's functions")
   return
 end
-
-local config = require('aedile.config')
 
 local toggle = false
 local term_win_id
