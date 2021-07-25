@@ -36,6 +36,8 @@ local dir = (function()
   end
 end)()
 
+local M = {}
+
 local function mapping_update()
   if term_win_id == nil and vim.api.nvim_win_is_valid(term_win_id) == false or 
      term_buf_id == nil and vim.api.nvim_buf_is_valid(term_buf_id) == false then
@@ -49,7 +51,7 @@ local function mapping_update()
   vim.api.nvim_buf_set_keymap(working_buf_id, 'n', config.get_scrolldown(), '<cmd>call win_execute('..term_win_id..',"normal! \\<c-d>")<cr>', {})
 end
 
-local function toggle_repl()
+function M.toggle_repl()
   local filetype = vim.bo.filetype
   repl = config.get_repl(filetype)
 
@@ -93,13 +95,13 @@ local function toggle_repl()
 
 end
 
-local function terminate_repl()
+function M.terminate_repl()
   vim.fn.jobstop(term_job_id)
   vim.api.nvim_buf_delete(term_buf_id, { force = true })
   vim.api.nvim_echo({{'REPL `'..repl..'` (jobpid: '..term_job_id..') has been terminated', 'Normal'}}, false, {})
 end
 
-local function setup(conf_tbl)
+function M.setup(conf_tbl)
   if conf_tbl['repl'] ~= nil then
     config.modify_repl(conf_tbl['repl'])
   end
@@ -110,8 +112,4 @@ local function setup(conf_tbl)
   config.modify_mappings(conf_tbl['scrollup_map'], conf_tbl['scrolldown_map'])
 end
 
-return {
-  toggle_repl = toggle_repl,
-  terminate_repl = terminate_repl,
-  setup = setup,
-}
+return M
