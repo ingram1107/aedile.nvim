@@ -87,7 +87,7 @@ function M.toggle_repl()
     vim.api.nvim_exec(dir..config.get_split_method()..'split | terminal '..repl, false)
     term_win_id = vim.api.nvim_get_current_win()
     term_buf_id = vim.api.nvim_win_get_buf(term_win_id)
-    term_job_id = vim.api.nvim_buf_get_var(term_buf_id, 'terminal_job_id')
+    term_job_id = vim.bo[term_buf_id]['channel']
     vim.fn.setreg('+', term_job_id)
     mapping_update()
     toggle = true
