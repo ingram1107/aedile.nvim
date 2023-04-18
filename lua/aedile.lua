@@ -21,7 +21,7 @@ if vim.version().minor < 5 then
   vim.api.nvim_err_writeln("fatal: Neovim version < 0.5.0: deactivate all Aedile's functions")
   return
 elseif vim.version().minor >= 9 then
-  vim.api.nvim_exec = vim.api.nvim_exec2
+  vim.api.nvim_exec = vim.cmd
 end
 
 local toggle = false
